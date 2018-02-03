@@ -12,3 +12,6 @@ src/config/youtube.js
 compiled/config/youtube.js
 
 package-lock.json
+
+.floo
+.flooignore
