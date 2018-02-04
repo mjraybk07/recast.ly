@@ -2,10 +2,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    //this.videos = props.videos;
+    //props.videos(null, this.testFn.bind(this));
+
     this.state = {
-      videoList: exampleVideoData,
-      currentVideo: exampleVideoData[0]
+      videoList: props.videos,
+      currentVideo: props.videos[0]
     };
+  }
+
+  search () {
+    searchYouTube(null, (data) => {
+      this.setState({
+        videoList: data,
+        currentVideo: data[0]
+        })
+      console.log('data.items', data);
+    })  
+  }
+
+  componentDidMount () {
+    console.log('componentDidMount');
+    this.search();
   }
 
   handleVideoClick (event) {
