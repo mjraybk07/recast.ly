@@ -1,16 +1,15 @@
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      videoList: props.videos,
-      currentVideo: props.videos[0]
+      videoList: exampleVideoData,
+      currentVideo: exampleVideoData[0]
     };
-
   }
 
-  search () {
-    this.props.searchYouTube(null, (data) => {
+  search() {
+    this.props.searchYouTube(null, data => {
       this.setState({
         videoList: data,
         currentVideo: data[0]
@@ -19,14 +18,14 @@ class App extends React.Component {
     });
   }
 
-  componentDidMount () {
+  componentDidMount() {
     console.log('componentDidMount');
     this.search();
   }
 
-  handleVideoClick (event) {
+  handleVideoClick(event) {
     console.log('handleVideoClick event:', event);
-    this.setState({currentVideo: event});
+    this.setState({ currentVideo: event });
   }
 
   render() {
@@ -43,10 +42,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.currentVideo}/>
+            <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videoList} handleVideoClick={this.handleVideoClick.bind(this)}/>
+            <VideoList videos={this.state.videoList} handleVideoClick={this.handleVideoClick.bind(this)} />
           </div>
         </div>
       </div>
