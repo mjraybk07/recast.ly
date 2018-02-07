@@ -16,7 +16,7 @@ class App extends React.Component {
     var options = {
       query: query || 'hackreactor',
       key: window.YOUTUBE_API_KEY,
-      max: 5,
+      max: 5
     };
 
     this.props.searchYouTube(options, data => {
@@ -24,32 +24,26 @@ class App extends React.Component {
         videoList: data,
         currentVideo: data[0]
       });
-      console.log('data.items', data);
     });
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     this.search();
   }
 
   handleVideoClick(event) {
-    console.log('handleVideoClick event:', event);
     this.setState({ currentVideo: event });
   }
 
-  handleSearchInput (event) {
+  handleSearchInput(event) {
     var self = this;
     console.log('handleSearchInput \n---> self:', self, '---> query:', event);
-    _.debounce( () => {
-      console.log('handleSearchClick', $('input.form-control').val());
+    _.debounce(() => {
       self.search($('input.form-control').val());
     }, 500)();
-    //this.search($('input.form-control').val());
   }
 
-  handleSearchButton (event) {
-    console.log('handleSearchButton', event);
+  handleSearchButton(event) {
     this.search($('input.form-control').val());
   }
 
@@ -58,7 +52,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search handleSearchInput={this.handleSearchInput} handleSearchButton={this.handleSearchButton}/>
+            <Search handleSearchInput={this.handleSearchInput} handleSearchButton={this.handleSearchButton} />
           </div>
         </nav>
         <div className="row">
