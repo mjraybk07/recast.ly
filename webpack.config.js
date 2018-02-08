@@ -7,7 +7,7 @@ module.exports = {
   output: {
     filename: 'bundle.js'
   },
-  resolve: {
+  resolve: {  
     extensions: ['.js', '.jsx', '.json']
   },
   stats: {

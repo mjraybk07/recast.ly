@@ -1,5 +1,9 @@
-var VideoPlayer = props => (
+import React from 'react';
+// <br />  <pre><code>{JSON.stringify(props.video, null, 4)}</code></pre>
+
+const VideoPlayer = props => (
   <div className="video-player">
+
     <div className="embed-responsive embed-responsive-16by9">
       <iframe
         className="embed-responsive-item"
@@ -9,7 +13,10 @@ var VideoPlayer = props => (
     </div>
     <div className="video-player-details">
       <h3>{props.video.snippet.title}</h3>
-      <div>{props.video.snippet.description}</div>
+      <div>{props.video.snippet.description}
+
+
+      </div>
     </div>
   </div>
 );

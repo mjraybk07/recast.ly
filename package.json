@@ -9,7 +9,9 @@
     "watch": "webpack --watch",
     "test": "live-server --open=./SpecRunner.html --port=8081",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
-    "start": "live-server & babel . --watch --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline"
+    "start":
+      "live-server & babel . --watch --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
+    "go": "webpack-dev-server --open"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",

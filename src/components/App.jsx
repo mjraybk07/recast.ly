@@ -1,8 +1,12 @@
 import React from 'react';
-import Search from 'Search';
-import VideoList from 'VideoList';
-import VideoListEntry from  'VideoListEntry';
-import VideoPlayer from 'VideoPlayer';
+import {render} from 'react-dom';
+import preload from '../data/data.json';
+import $ from 'jquery';
+import _ from 'lodash'
+import Search from './Search';
+import VideoList from './VideoList';
+//import VideoListEntry from  'VideoListEntry';
+import VideoPlayer from './VideoPlayer';
 
 
 class App extends React.Component {
@@ -10,9 +14,10 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      videoList: exampleVideoData,
-      currentVideo: exampleVideoData[0]
+      videoList: preload.items,
+      currentVideo: preload.items[0]
     };
+
     this.handleSearchInput = this.handleSearchInput.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
     this.handleVideoClick = this.handleVideoClick.bind(this);
@@ -34,8 +39,22 @@ class App extends React.Component {
     });
   }
 
+
+  fetchData(query='pickles') {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&maxResults=5&type=video&key=AIzaSyBQba-G_MH4gYPpgTLlnhsWjXXqVO6uomQ`)
+    .then( results => {
+      return results.json();
+    })
+    .then( data => {
+      console.log('this is the data: ', data.items);
+      this.setState({videoList: data.items, currentVideo: data.items[0]});
+    })
+
+  }
+
   componentDidMount() {
-    this.search();
+
+    this.fetchData();
   }
 
   handleVideoClick(event) {
@@ -43,17 +62,22 @@ class App extends React.Component {
   }
 
   handleSearchInput(event) {
-    var self = this;
-    console.log('handleSearchInput \n---> self:', self, '---> query:', event);
-    _.debounce(() => {
-      self.search($('input.form-control').val());
-    }, 500)();
+  //   var self = this;
+
+  //   console.log('handleSearchInput \n---> self:', self, '---> query:', event);
+  //  // _.debounce((event) => {
+  // //  self.fetchData(event.target.value); //  $('input.form-control').val()
+  //  //}, 500)();
+  //   setTimeout((event)=> { console.log('inside timeout: ', self.event); self.fetchData(event.target.value)}, 2000);
   }
 
   handleSearchButton(event) {
-    this.search($('input.form-control').val());
-  }
+    console.log('handleSearchButton', event);
+    // this.fetchData($('input.form-control').val());
+    this.fetchData(event.target.value);
 
+  }
+//  <VideoPlayer video={this.state.currentVideo} />
   render() {
     return (
       <div>
